@@ -1,0 +1,13 @@
+{% block title %}
+Создание записи
+{% endblock title %}
+
+<hr>
+
+{% block content %}
+<form action="" method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="Сохранить" />
+</form>
+{% endblock content %}

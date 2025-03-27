@@ -1,0 +1,33 @@
+{% block title %}
+Информация о записи
+{% endblock title %}
+
+<hr>
+
+{% block content %}
+<h1>Дата создания записи</h1>
+<h3>{{ data.date_create }}</h3>
+<hr>
+<table>
+    <tr>
+        <td>Статус</td>
+        <td>Тип</td>
+        <td>Категория</td>
+        <td>Подкатегория</td>
+        <td>Сумма</td>
+    </tr>
+    <tr>
+        <td>{{ data.status }}|</td>
+        <td>{{ data.tipe.name }}|</td>
+        <td>{{ data.tipe.category.name }}|</td>
+        <td>{{ data.tipe.category.subcategory.name }}|</td>
+        <td>{{ data.summ }}|</td>
+    </tr>
+</table>
+<h1>Комментарий</h1>
+{% if data.comment %}
+{{ data.comment }}
+{% else %}
+<h3>Нет комментариев</h3>
+{% endif %}
+{% endblock content %}

@@ -1,0 +1,25 @@
+{% block title %}
+Список подкатегорий
+{% endblock title %}
+
+<hr>
+
+{% block content %}
+<table>
+    <tr>
+        <td>Название:</td>
+        <td>Редактирование</td>
+        <td>Удаление</td>
+
+    </tr>
+    {% for subcategory in subcategories %}
+    <tr>
+        <td>{{ subcategory.name }}</td>
+        <td><a href="{% url 'subcategory_update' subcategory.id %}">Редактировать</a> </td>
+        <td><a href="{% url 'subcategory_delete' subcategory.id %}">Удалить</a> </td>
+    </tr>
+    {% endfor %}
+</table>
+<button><a href="{% url 'subcategory_create' %}">Добавить Подкатегорию</a> </button>
+<button><a href="{% url 'dataDDS_list' %}">Вернуться на главную страницу</a> </button>
+{% endblock content %}

@@ -1,0 +1,69 @@
+{% extends 'main.html' %}
+
+{% load custom_tags %}
+
+<!--все взаимодействия происходять с помощью специальных кнопок-->
+
+{% block title %}
+Страница с записями о ДДС
+{% endblock title %}
+
+<hr>
+
+{% block content %}
+<form action="" method="get">
+    {{ filterset.form.as_p }}
+    <input type="submit" value="Найти" />
+</form>
+<h2>Количество записей</h2>
+{{ datas|length }}
+{% if datas %}
+    <table>
+        <tr>
+            <td>Дата создания</td>
+            <td><a href="{% url 'status_list' %}">Статус</a> </td>
+            <td><a href="{% url 'tipe_list' %}">Тип</a> </td>
+            <td><a href="{% url 'category_list' %}">Категория</a></td>
+            <td><a href="{% url 'subcategory_list' %}">Подкатегория</a></td>
+            <td>Сумма</td>
+            <td>Комментарий</td>
+            <td>Подробнее</td>
+            <td>Редактировать</td>
+            <td>Удаление</td>
+        </tr>
+        {% for data in datas %}
+        <tr>
+            <td>{{ data.date_create }}|</td>
+            <td>{{ data.status }}|</td>
+            <td>{{ data.tipe.name }}|</td>
+            <td>{{ data.tipe.category.name }}|</td>
+            <td>{{ data.tipe.category.subcategory.name }}|</td>
+            <td>{{ data.summ }}|</td>
+            <td>{{ data.comment|truncatechars:10 }}|</td>
+            <td><a href="{% url 'dataDDS_detail' data.id %}">О записи</a> </td>
+            <td><a href="{% url 'data_update' data.id %}">Редактировать</a> </td>
+            <td><a href="{% url 'data_delete' data.id %}">Удалить</a> </td>
+        </tr>
+        {% endfor %}
+    </table>
+{% else %}
+<h3>Нет записей</h3>
+{% endif %}
+{% if page_obj.has_previous %}
+    <a href="?{% url_replace page=1 %}">1</a>
+    {% if page_onj.previous_page_number != 1 %}
+        ...
+        <a href="?{% url_replace page=page_obj.previous_page_number %}">{{ page_obj.previous_page_number }}</a>
+    {% endif %}
+{% endif %}
+
+{{ page_obj.number }}
+
+{% if page_obj.has_next %}
+    <a href="?{% url_replace page=page_obj.next_page_number %}">{{ page_obj.next_page_number }}</a>
+    {% if paginator.num_pages != page_obj.next_page_number %}
+        ...
+        <a href="?{% url_replace page=page_obj.paginator.num_pages %}">{{ page_obj.paginator.num_pages }}</a>
+    {% endif %}
+{% endif %}
+{% endblock content %}

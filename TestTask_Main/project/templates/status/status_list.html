@@ -1,0 +1,26 @@
+{% block title %}
+Список статусов
+{% endblock title %}
+
+<hr>
+
+{% block content %}
+
+<table>
+    <tr>
+        <td>Название:</td>
+        <td>Редактировать</td>
+        <td>Удаление</td>
+
+    </tr>
+    {% for s in status %}
+    <tr>
+        <td>{{ s.name }}</td>
+        <td><a href="{% url 'status_update' s.id %}">Редактировать</a> </td>
+        <td><a href="{% url 'status_delete' s.id %}">Удаление</a> </td>
+    </tr>
+    {% endfor %}
+</table>
+<button><a href="{% url 'status_create' %}">Добавить статус</a> </button>
+<button><a href="{% url 'dataDDS_list' %}">Вернуться на главную страницу</a> </button>
+{% endblock content %}

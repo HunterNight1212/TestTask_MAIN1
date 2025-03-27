@@ -1,0 +1,15 @@
+<html>
+    <body>
+        {% block title %}
+        {% endblock title %}
+        <hr>
+        <div>
+            <button>
+                <a href="{% url 'data_create' %}">Создать запись</a>
+            </button>
+        </div>
+
+        {% block content %}
+        {% endblock content %}
+    </body>
+</html>

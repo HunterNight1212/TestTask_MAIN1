@@ -1,0 +1,9 @@
+{% block content %}
+<h1>Удаление типа</h1>
+<hr>
+<form action="" method="post">
+    {% csrf_token %}
+    <p>Удаляем тип ?</p>
+    <input type="submit" value="Удалить">
+</form>
+{% endblock content %}

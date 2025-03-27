@@ -1,0 +1,26 @@
+{% block title %}
+Список типов
+{% endblock title %}
+
+<hr>
+
+{% block content %}
+<table>
+    <tr>
+        <td>Название</td>
+        <td>Категория</td>
+        <td>Редактирование</td>
+        <td>Удаление</td>
+    </tr>
+    {% for tipe in tipes %}
+    <tr>
+        <td>{{ tipe.name }}</td>
+        <td>{{ tipe.category.name }}</td>
+        <td><a href="{% url 'tipe_update' tipe.id %}">Редактировать</a> </td>
+        <td><a href="{% url 'tipe_delete' tipe.id %}">Удалить</a> </td>
+    </tr>
+    {% endfor %}
+</table>
+<button><a href="{% url 'tipe_create' %}">Добавить тип</a> </button>
+<button><a href="{% url 'dataDDS_list' %}">Вернуться на главную страницу</a> </button>
+{% endblock content %}
